@@ -18,10 +18,12 @@ function getAll(bot,message){
     const embed = new MessageEmbed()
     .setColor('WHITE')
     const commands = (category) =>{
-        return bot.commands.filter(cmd=>cmd.category===category).map(cmd=>`- \`${command.name}\``).join(" ");
+        return bot.commands.filter(cmd=>cmd.category===category).map(cmd=>`- \`${cmd.name}\``).join(" ");
     }
     const info = bot.categories.map(cat=>stripIndents`**${cat[0].toUpperCase()+cat.slice(1)}**\n${commands(cat)}`).reduce((string,category) => string+"\n"+category)
-    return message.channel.send(embed.setDescription(info),embed.setFooter(`There are ${bot.commands.size} commands!`))
+    embed.setDescription(info)
+    embed.setFooter(`There are ${bot.commands.size} commands!`)
+    return message.channel.send(embed)
 }
 function getCMD(bot,message,input){
     const embed = new MessageEmbed()
