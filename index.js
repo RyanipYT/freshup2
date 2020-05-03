@@ -17,8 +17,17 @@ const timeout = new Set();
 });
 bot.on('ready',()=>{
     bot.user.setActivity('the SASCRP Assets', { type: "WATCHING"})
-    console.log(`Hello! ${bot.user.username} is now online!`)
+    console.log(`Hello Ryan! You are logged in as ${bot.user.tag}`)
 })
+
+bot.on("guildMemberAdd", member => {
+
+    const channel = member.guild.channels.cache.find(channel => channel.id === "699722609297850382")
+    if(!channel) return;
+
+    channel.send(`Welcome to San Andreas State Community RP, ${member}, Go read the ruled in  <#699722609033478152> & go to <#699722609297850379> to apply`)
+})
+
 bot.on('message', async message=>{
     if(message.author.bot) return; // Checks if user that is saying the message is a BOT
     if(!message.content.startsWith(prefix)) return; //Checks if the user running the command has entered the prefix or not
